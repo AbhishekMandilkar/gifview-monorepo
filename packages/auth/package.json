@@ -1,0 +1,25 @@
+{
+  "name": "@gifview-monorepo/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@better-auth/expo": "catalog:",
+    "@gifview-monorepo/db": "workspace:*",
+    "@gifview-monorepo/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@gifview-monorepo/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
