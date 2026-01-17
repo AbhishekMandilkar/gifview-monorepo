@@ -3,11 +3,11 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsdown",
+    "build": "tsc -b",
     "check-types": "tsc -b",
     "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
     "dev": "bun run --hot src/index.ts",
-    "start": "bun run dist/index.js",
+    "start": "bun run src/index.ts",
     "test:api": "node test/api-test.js"
   },
   "dependencies": {
@@ -26,7 +26,6 @@
     "@types/bun": "catalog:",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
-    "tsdown": "^0.16.5",
     "typescript": "catalog:"
   }
 }
