@@ -1,2 +1,3 @@
 export * from "./auth";
-export {};
+export * from "./schema";
+export * from "./relations";
