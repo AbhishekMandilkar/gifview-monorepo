@@ -72,6 +72,7 @@
         "better-auth": "catalog:",
         "cors": "^2.8.5",
         "dotenv": "catalog:",
+        "drizzle-orm": "^0.45.1",
         "express": "^5.1.0",
         "zod": "catalog:",
       },

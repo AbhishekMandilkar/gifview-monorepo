@@ -7,7 +7,8 @@
     "check-types": "tsc -b",
     "compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
     "dev": "bun run --hot src/index.ts",
-    "start": "bun run dist/index.js"
+    "start": "bun run dist/index.js",
+    "test:api": "node test/api-test.js"
   },
   "dependencies": {
     "@gifview-monorepo/auth": "workspace:*",
@@ -16,6 +17,7 @@
     "better-auth": "catalog:",
     "cors": "^2.8.5",
     "dotenv": "catalog:",
+    "drizzle-orm": "^0.45.1",
     "express": "^5.1.0",
     "zod": "catalog:"
   },
