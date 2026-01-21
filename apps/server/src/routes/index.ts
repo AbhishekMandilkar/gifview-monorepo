@@ -8,7 +8,7 @@ import postMediaRoutes from "./postMediaRoutes";
 import postLikeRoutes from "./postLikeRoutes";
 import postCommentRoutes from "./postCommentRoutes";
 import commentLikeRoutes from "./commentLikeRoutes";
-import rssController from "../modules/rss/rss.controller";
+import { syncController } from "../modules/sync";
 
 const router: IRouter = Router();
 
@@ -17,7 +17,7 @@ router.use("/gifs", gifRoutes);
 router.use("/users", userRoutes);
 router.use("/connectors", connectorRoutes);
 router.use("/interests", interestRoutes);
-router.use("/rss", rssController);
+router.use("/sync", syncController);
 router.use(postMediaRoutes);
 router.use(postLikeRoutes);
 router.use(postCommentRoutes);
