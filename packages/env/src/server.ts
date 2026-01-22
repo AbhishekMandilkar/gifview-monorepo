@@ -8,6 +8,9 @@ const envSchema = z.object({
   CORS_ORIGIN: z.string().url(),
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   OPENAI_API_KEY: z.string().min(1),
+  // GIF Providers
+  GIPHY_API_KEY: z.string().min(1),
+  TENOR_API_KEY: z.string().min(1),
 });
 
 export const env = envSchema.parse(process.env);

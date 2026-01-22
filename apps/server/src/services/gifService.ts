@@ -1,5 +1,5 @@
 import { db, gifs, type Gif, type GifInsert } from "@gifview-monorepo/db";
-import { eq, count } from "drizzle-orm";
+import { eq, count, inArray } from "drizzle-orm";
 
 export const getAllGifs = async (limit = 50, offset = 0): Promise<{ data: Gif[]; total: number }> => {
   const [data, countResult] = await Promise.all([
@@ -19,6 +19,21 @@ export const getGifByPostId = async (postId: string): Promise<Gif | undefined> =
   return db.query.gifs.findFirst({
     where: eq(gifs.postId, postId),
   });
+};
+
+/**
+ * Get existing GIF URLs from a list of URLs
+ * Used for deduplication when selecting GIFs
+ */
+export const getExistingGifUrls = async (urls: string[]): Promise<Set<string>> => {
+  if (urls.length === 0) return new Set();
+
+  const existingGifs = await db
+    .select({ url: gifs.url })
+    .from(gifs)
+    .where(inArray(gifs.url, urls));
+
+  return new Set(existingGifs.map((g) => g.url));
 };
 
 export const createGif = async (data: GifInsert): Promise<Gif> => {
