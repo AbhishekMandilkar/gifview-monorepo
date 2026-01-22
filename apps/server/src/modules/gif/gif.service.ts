@@ -26,7 +26,7 @@ import type {
  * Uses smart provider selection based on content category
  *
  * @param topic - Topic suggestion string in format "Area: keyword1, keyword2\nArea2: keyword3"
- * @returns GIF URL and provider
+ * @returns GIF URL and provider (empty if no GIF found)
  */
 export async function getGif(topic: string): Promise<GifResult> {
   // Parse topic and create priority-sorted search list
@@ -51,7 +51,7 @@ export async function getGif(topic: string): Promise<GifResult> {
         const existingUrls = await gifDbService.getExistingGifUrls(gifUrls);
 
         // Find first GIF that doesn't exist in DB
-        const firstNewGif = gifUrls.find((url) => !existingUrls.has(url));
+        const firstNewGif = gifUrls.find((gifUrl) => !existingUrls.has(gifUrl));
 
         // Return first new GIF if found, otherwise return first GIF
         return {

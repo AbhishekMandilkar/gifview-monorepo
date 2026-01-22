@@ -2,7 +2,7 @@ export * from "./auth";
 export * from "./schema";
 export * from "./relations";
 
-import { posts, gifs, connectors, interests, postMedia, postLikes, postComments, commentLikes } from "./schema";
+import { posts, gifs, connectors, interests, postMedia, postLikes, postComments, commentLikes, post2Interest } from "./schema";
 import { user } from "./auth";
 
 export type Post = typeof posts.$inferSelect;
@@ -22,3 +22,5 @@ export type PostComment = typeof postComments.$inferSelect;
 export type PostCommentInsert = typeof postComments.$inferInsert;
 export type CommentLike = typeof commentLikes.$inferSelect;
 export type CommentLikeInsert = typeof commentLikes.$inferInsert;
+export type Post2Interest = typeof post2Interest.$inferSelect;
+export type Post2InterestInsert = typeof post2Interest.$inferInsert;

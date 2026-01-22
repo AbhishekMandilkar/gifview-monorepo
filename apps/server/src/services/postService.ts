@@ -1,5 +1,5 @@
 import { db, posts, type Post, type PostInsert } from "@gifview-monorepo/db";
-import { eq, and, count, or } from "drizzle-orm";
+import { eq, and, count, or, isNull, inArray, desc } from "drizzle-orm";
 
 // ============================================
 // READ OPERATIONS
@@ -128,4 +128,46 @@ export const softDeletePost = async (id: string): Promise<Post | undefined> => {
     .where(eq(posts.id, id))
     .returning();
   return post;
+};
+
+// ============================================
+// POST ENRICHMENT OPERATIONS
+// ============================================
+
+/**
+ * Fetch posts that haven't been enriched yet (aiChecked is null).
+ * Used by the post-enrichment scheduler.
+ */
+export const getUnenrichedPosts = async (
+  limit: number = 5
+): Promise<Pick<Post, "id" | "title" | "description" | "content">[]> => {
+  return db
+    .select({
+      id: posts.id,
+      title: posts.title,
+      description: posts.description,
+      content: posts.content,
+    })
+    .from(posts)
+    .where(
+      and(
+        isNull(posts.aiChecked), // Not yet enriched
+        eq(posts.isDeleted, false) // Not deleted
+      )
+    )
+    .orderBy(desc(posts.createdDate)) // Most recent first
+    .limit(limit);
+};
+
+/**
+ * Mark posts as enriched by setting aiChecked timestamp.
+ * Called after successful enrichment.
+ */
+export const markPostsAsEnriched = async (postIds: string[]): Promise<void> => {
+  if (postIds.length === 0) return;
+
+  await db
+    .update(posts)
+    .set({ aiChecked: new Date().toISOString() })
+    .where(inArray(posts.id, postIds));
 };
