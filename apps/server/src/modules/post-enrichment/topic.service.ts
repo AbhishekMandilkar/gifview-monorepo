@@ -24,7 +24,7 @@ export async function suggestTopic(
   try {
     const result = await generateAIText({
       prompt,
-      model: "gpt-4o-mini", // Use smaller model for cost efficiency
+      model: "gpt-5-mini", // Use smaller model for cost efficiency
       temperature: 0.3, // Lower temperature for more consistent results
     });
 
