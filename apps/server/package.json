@@ -11,20 +11,22 @@
     "test:api": "node test/api-test.js"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.14",
     "@gifview-monorepo/auth": "workspace:*",
     "@gifview-monorepo/db": "workspace:*",
     "@gifview-monorepo/env": "workspace:*",
     "@tanstack/pacer": "^0.17.3",
+    "ai": "^6.0.45",
     "axios": "^1.13.2",
     "better-auth": "catalog:",
     "cors": "^2.8.5",
-    "dotenv": "catalog:",
+    "dotenv": "^17.2.3",
     "drizzle-orm": "^0.45.1",
     "express": "^5.1.0",
     "fast-xml-parser": "^5.0.9",
     "jsdom": "^26.1.0",
     "node-cron": "^3.0.3",
-    "zod": "catalog:"
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@gifview-monorepo/config": "workspace:*",

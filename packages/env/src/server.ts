@@ -7,6 +7,7 @@ const envSchema = z.object({
   BETTER_AUTH_URL: z.string().url(),
   CORS_ORIGIN: z.string().url(),
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+  OPENAI_API_KEY: z.string().min(1),
 });
 
 export const env = envSchema.parse(process.env);
