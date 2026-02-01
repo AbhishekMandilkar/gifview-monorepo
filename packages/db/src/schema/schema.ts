@@ -16,6 +16,7 @@ export const posts = pgTable("posts", {
 	connectorId: uuid("connector_id").notNull(),
 	sourceKey: text("source_key"),
 	sourceLink: text("source_link"),
+	sourceName: text("source_name"),
 	language: language(),
 	publishingDate: timestamp("publishing_date", { precision: 6, mode: 'string' }),
 	aiChecked: timestamp("ai_checked", { precision: 6, mode: 'string' }),

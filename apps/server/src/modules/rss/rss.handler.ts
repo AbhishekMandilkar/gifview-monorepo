@@ -4,6 +4,7 @@ import { XMLParser } from "fast-xml-parser";
 import { extractContentFromHTML } from "../../utils/html-utils";
 import { createLogger } from "../../utils/logger";
 import * as postService from "../../services/postService";
+import { PostSource } from "../../types/postSource";
 import type {
   ConnectorHandler,
   SyncResult,
@@ -20,6 +21,7 @@ interface RssConfig {
     url: string;
     text_css_selector?: string;
     max_size?: number;
+    source?: PostSource;
   };
 }
 
@@ -29,6 +31,7 @@ interface RSSPost {
   pubDate: string;
   description: string;
   language?: string;
+  sourceName?: PostSource;
 }
 
 interface RSSPostToProcess {
@@ -146,6 +149,8 @@ async function syncRss(
     const rssUrl = config?.RssJsonLd?.url;
     const connectorSelector = config?.RssJsonLd?.text_css_selector || "";
     const maxItems = config?.RssJsonLd?.max_size || QUEUE_CONFIG.DEFAULT_MAX_ITEMS;
+    // for now, default to BBC
+    const sourceName = config?.RssJsonLd?.source || PostSource.BBC;
 
     if (!rssUrl) {
       throw new Error("No RSS URL found in connector config");
@@ -162,7 +167,8 @@ async function syncRss(
     const rssJson = xmlParser.parse(rssText);
 
     const rawItems = rssJson?.rss?.channel?.item;
-    const rssList: RSSPost[] = Array.isArray(rawItems) ? rawItems : rawItems ? [rawItems] : [];
+    const rssList: RSSPost[] = (Array.isArray(rawItems) ? rawItems : rawItems ? [rawItems] : [])
+      .map((item: RSSPost) => ({ ...item, sourceName }));
     const totalItems = rssList.length;
     logger.info(`Found ${totalItems} items in RSS feed`);
 
@@ -266,6 +272,7 @@ async function buildPostData(params: {
       tags: [],
       sourceKey: post.link,
       sourceLink: post.link,
+      sourceName: post.sourceName,
       publishingDate: new Date(post.pubDate).toISOString(),
       language: "en",
       connectorId,
@@ -324,10 +331,13 @@ function validateConfig(configJson: string): boolean {
  *   "RssJsonLd": {
  *     "url": "https://example.com/feed.xml",
  *     "text_css_selector": "#main-content p",
- *     "max_size": 10
+ *     "max_size": 10,
+ *     "source": "bbc"
  *   }
  * }
  * ```
+ * 
+ * Valid source values: "bbc", "spotify", "reddit" (see PostSource enum)
  */
 export const rssConnectorHandler: ConnectorHandler = {
   type: "RssJsonLd",
