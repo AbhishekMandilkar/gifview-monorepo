@@ -1,5 +1,6 @@
 import app from "./app";
 import { registerRssConnector } from "./modules/rss";
+import { registerSpotifyConnector } from "./modules/spotify";
 import { initializeSyncScheduler } from "./modules/sync";
 import { initializeEnrichmentScheduler } from "./modules/post-enrichment";
 import { createLogger } from "./utils/logger";
@@ -11,7 +12,7 @@ const logger = createLogger("Server");
 // ============================================
 // Add new connector registrations here
 registerRssConnector();
-// registerSpotifyConnector();
+registerSpotifyConnector();
 // registerRedditConnector();
 // registerAppleMusicConnector();
 

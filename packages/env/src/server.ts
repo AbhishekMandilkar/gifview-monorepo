@@ -11,6 +11,9 @@ const envSchema = z.object({
   // GIF Providers
   GIPHY_API_KEY: z.string().min(1),
   TENOR_API_KEY: z.string().min(1),
+  // Spotify API (optional - for Spotify connector)
+  SPOTIFY_CLIENT_ID: z.string().optional(),
+  SPOTIFY_CLIENT_SECRET: z.string().optional(),
 });
 
 export const env = envSchema.parse(process.env);
