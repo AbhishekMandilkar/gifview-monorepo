@@ -1,0 +1,1 @@
+ALTER TABLE "userInterests" ADD COLUMN "level" text NOT NULL;

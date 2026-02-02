@@ -174,6 +174,7 @@ export const userInterests = pgTable("userInterests", {
 	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 	updatedAt: timestamp("updated_at", { withTimezone: true, mode: 'string' }).defaultNow(),
 	isDeleted: boolean("is_deleted").default(false).notNull(),
+	level: text("level").notNull()
 }, (table) => [
 	index("userInterest_interestId_idx").on(table.interestId),
 	index("userInterest_userId_idx").on(table.userId),
