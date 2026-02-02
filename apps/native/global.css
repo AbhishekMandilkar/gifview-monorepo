@@ -3,3 +3,37 @@
 @import "heroui-native/styles";
 
 @source './node_modules/heroui-native/lib';
+
+/* APP theme colors */
+:root {
+  --sub-sunny: #F9F871;
+  --button-background: #f5f5f008;
+  --main-white: #F5F5F0;
+  --main-black: #151819;
+  --main-ultramarine-blue: #485CF3;
+  --main-lavender: #E1E1FA;
+  --dark-grey: #7D7D7D;
+  --sub-pastel-red: #FE6061;
+  --main-foreground: #333333;
+  --light-grey: #B4B4B4;
+  --charcoal: #313B41;
+  --sub-light-grey: #EEEEEE;
+}
+
+
+/* Override default colors */
+@layer theme {
+ 
+  @variant light {
+    /* Override default colors */
+    --accent: var(--main-ultramarine-blue); /* Custom indigo accent */
+    --background: var(--main-black);
+  }
+
+  @variant dark {
+    /* Override dark theme colors */
+    --accent: oklch(0.65 0.25 270);
+    --background: var(--main-black);
+  }
+}
+  

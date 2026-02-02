@@ -3,24 +3,19 @@ import { Tabs } from "expo-router";
 import { useThemeColor } from "heroui-native";
 
 export default function TabLayout() {
-  const themeColorForeground = useThemeColor("foreground");
-  const themeColorBackground = useThemeColor("background");
+  const backgroundColor = useThemeColor("background");
+  const foregroundColor = useThemeColor("foreground");
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        headerStyle: {
-          backgroundColor: themeColorBackground,
-        },
-        headerTintColor: themeColorForeground,
-        headerTitleStyle: {
-          color: themeColorForeground,
-          fontWeight: "600",
-        },
         tabBarStyle: {
-          backgroundColor: themeColorBackground,
+          backgroundColor,
+          borderTopColor: useThemeColor("border"),
         },
+        tabBarActiveTintColor: useThemeColor("accent"),
+        tabBarInactiveTintColor: foregroundColor,
       }}
     >
       <Tabs.Screen
@@ -33,11 +28,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="profile"
         options={{
-          title: "Explore",
+          title: "Profile",
           tabBarIcon: ({ color, size }: { color: string; size: number }) => (
-            <Ionicons name="compass" size={size} color={color} />
+            <Ionicons name="person" size={size} color={color} />
           ),
         }}
       />
