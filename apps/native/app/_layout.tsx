@@ -7,6 +7,7 @@ import {KeyboardProvider} from "react-native-keyboard-controller";
 import {AppThemeProvider} from "@/contexts/app-theme-context";
 import {SessionProvider, useSession} from "@/contexts/auth";
 import {SplashScreenController} from "@/components/splash-controller";
+import QueryProvider from "@/contexts/query-provider";
 
 export const unstable_settings = {
   initialRouteName: "(app)",
@@ -43,8 +44,10 @@ export default function Layout() {
         <AppThemeProvider>
           <HeroUINativeProvider>
             <SessionProvider>
-              <SplashScreenController />
-              <RootNavigator />
+              <QueryProvider>
+                <SplashScreenController />
+                <RootNavigator />
+              </QueryProvider>
             </SessionProvider>
           </HeroUINativeProvider>
         </AppThemeProvider>

@@ -21,6 +21,7 @@
     "@gorhom/bottom-sheet": "^5",
     "@react-navigation/drawer": "^7.3.9",
     "@react-navigation/elements": "^2.8.1",
+    "@tanstack/react-query": "^5.90.20",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "expo": "^54.0.23",
@@ -49,7 +50,8 @@
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.1.18",
     "uniwind": "^1.2.2",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@gifview-monorepo/config": "workspace:*",
